@@ -82,7 +82,10 @@ class Producto(db.Model):
         return float(self.precio_venta)
 
     def to_dict_publico(self) -> dict:
-        """Lo que ve el cliente. NO expone precio_costo."""
+        """Lo que ve el cliente. NO expone precio_costo. Incluye imagenes."""
+        # Imagen principal (la de menor orden) y todas las URLs
+        imagenes_ordenadas = sorted(self.imagenes, key=lambda i: i.orden)
+        imagen_principal = imagenes_ordenadas[0].url if imagenes_ordenadas else None
         return {
             "id": self.id,
             "categoria_id": self.categoria_id,
@@ -101,6 +104,8 @@ class Producto(db.Model):
             ),
             "precio_final": self.precio_final(),
             "estado": self.estado,
+            "imagen_principal": imagen_principal,
+            "imagenes": [img.url for img in imagenes_ordenadas],
         }
 
     def to_dict_admin(self) -> dict:
