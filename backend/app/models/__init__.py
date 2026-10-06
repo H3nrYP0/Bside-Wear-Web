@@ -13,4 +13,5 @@ __all__ = [
     "TipoCorte",
     "VarianteProducto",
     "ImagenProducto",
+    "Diseno",
 ]
