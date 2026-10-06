@@ -201,6 +201,18 @@ def crear_producto(data: dict) -> Producto:
     en_oferta = bool(data.get("en_oferta", False))
     porcentaje_descuento = _validar_oferta(en_oferta, data.get("porcentaje_descuento"))
 
+    # Validar variantes iniciales
+    variantes_data = data.get("variantes")
+    if variantes_data is not None:
+        if not isinstance(variantes_data, list):
+            raise ValueError("El campo 'variantes' debe ser una lista")
+        if len(variantes_data) == 0:
+            raise ValueError("Si envías 'variantes', debe haber al menos una")
+
+    # Si no vienen variantes, se creará una variante genérica automáticamente
+    if variantes_data is None:
+        variantes_data = [{"talla": None, "color": None, "stock": 0}]
+
     producto = Producto(
         nombre=nombre,
         descripcion=_normalizar_texto(data.get("descripcion")) or None,
@@ -215,6 +227,12 @@ def crear_producto(data: dict) -> Producto:
     )
 
     db.session.add(producto)
+    db.session.flush()  # Para obtener el id del producto antes del commit
+
+    # Crear variantes iniciales
+    from app.services import variante_service
+    variante_service.crear_variantes_iniciales(producto.id, variantes_data)
+
     db.session.commit()
     return producto
 

@@ -3,6 +3,9 @@ from app.extensions import db
 
 class VarianteProducto(db.Model):
     __tablename__ = "variantes_producto"
+    __table_args__ = (
+        db.UniqueConstraint("producto_id", "talla", "color", name="uq_variante_producto_talla_color"),
+    )
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     producto_id = db.Column(
