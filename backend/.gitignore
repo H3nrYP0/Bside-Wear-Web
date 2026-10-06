@@ -1,0 +1,35 @@
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Variables de entorno
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# Migraciones generadas (opcional, tú decides)
+# migrations/versions/*.py
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Cobertura
+.coverage
+htmlcov/

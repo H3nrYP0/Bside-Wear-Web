@@ -1,0 +1,49 @@
+# ===== Python / Backend =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.Python
+build/
+dist/
+
+# Entornos virtuales
+venv/
+env/
+.venv/
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Flask instance
+instance/
+
+# ===== Node / Frontend =====
+node_modules/
+.vite/
+
+# ===== Editores =====
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# ===== Sistema operativo =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Logs =====
+*.log
+npm-debug.log*
+
+# ===== Testing / Coverage =====
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ===== Base de datos local =====
+*.db
+*.sqlite3
