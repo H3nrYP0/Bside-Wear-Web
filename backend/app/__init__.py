@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from app.config import get_config
 from app.extensions import db, migrate, jwt, cors, mail
+from app.routes.categorias import categorias_bp
 
 
 def create_app():
