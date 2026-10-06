@@ -35,6 +35,7 @@ def create_app():
     from app.routes.imagenes import imagenes_bp
     from app.routes.disenos import disenos_bp
     from app.routes.pedidos import pedidos_bp
+    from app.routes.dashboard import dashboard_bp
 
     app.register_blueprint(health_bp, url_prefix="/api")
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
@@ -44,6 +45,7 @@ def create_app():
     app.register_blueprint(imagenes_bp, url_prefix="/api/imagenes")
     app.register_blueprint(disenos_bp, url_prefix="/api/disenos")
     app.register_blueprint(pedidos_bp, url_prefix="/api/pedidos")
+    app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
 
     # Manejador global de errores 404
     @app.errorhandler(404)
