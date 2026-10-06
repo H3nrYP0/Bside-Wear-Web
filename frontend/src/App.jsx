@@ -6,6 +6,7 @@ import Personalizador from "./pages/Personalizador";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/Login";
 import NoEncontrada from "./pages/NoEncontrada";
+import ProductoDetalle from "./pages/ProductoDetalle";
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/catalogo/:id" element={<ProductoDetalle />} />
           <Route path="/personalizar" element={<Personalizador />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NoEncontrada />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
