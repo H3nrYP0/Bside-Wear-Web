@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta oficial B-Side (del manual de marca 2026) */
+  --color-bside-blue: #0012f7;
+  --color-bside-orange: #ff4e00;
+  --color-bside-gold: #ffa300;
+  --color-bside-yellow: #ffff00;
+  --color-bside-black: #1e2c39;
+  --color-bside-white: #ffffff;
+
+  /* Tipografía oficial */
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Baloo 2", "Poppins", system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Poppins", system-ui, sans-serif;
+  background-color: #ffffff;
+  color: #1e2c39;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
