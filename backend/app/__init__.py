@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from app.config import get_config
 from app.extensions import db, migrate, jwt, cors, mail
-from app.routes.categorias import categorias_bp
+
 
 
 def create_app():
@@ -29,8 +29,10 @@ def create_app():
     # Registrar blueprints
     from app.routes.health import health_bp
     from app.routes.auth import auth_bp
+    from app.routes.categorias import categorias_bp
     app.register_blueprint(health_bp, url_prefix="/api")
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(categorias_bp, url_prefix="/api/categorias")
 
     # Manejador global de errores 404
     @app.errorhandler(404)
