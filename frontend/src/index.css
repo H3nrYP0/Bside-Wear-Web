@@ -1,17 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  /* Paleta oficial B-Side (del manual de marca 2026) */
   --color-bside-blue: #0012f7;
   --color-bside-orange: #ff4e00;
   --color-bside-gold: #ffa300;
   --color-bside-yellow: #ffff00;
   --color-bside-black: #1e2c39;
   --color-bside-white: #ffffff;
+}
 
-  /* Tipografía oficial */
-  --font-sans: "Poppins", system-ui, sans-serif;
-  --font-display: "Baloo 2", "Poppins", system-ui, sans-serif;
+/* Variables CSS globales (independientes de Tailwind) */
+:root {
+  --bside-blue: #0012f7;
+  --bside-orange: #ff4e00;
+  --bside-gold: #ffa300;
+  --bside-yellow: #ffff00;
+  --bside-black: #1e2c39;
+  --bside-white: #ffffff;
+  --bside-gray-100: #f5f5f5;
+  --bside-gray-200: #e5e5e5;
+  --bside-gray-500: #737373;
 }
 
 * {
@@ -32,9 +40,179 @@ a {
   color: inherit;
 }
 
-button {
-  cursor: pointer;
-  border: none;
-  background: none;
+/* ========================================
+   BOTONES
+   ======================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: inherit;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 9999px;
+  text-align: center;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn-primary {
+  background-color: var(--bside-blue);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--bside-orange);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--bside-black);
+  border: 2px solid var(--bside-black);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--bside-black);
+  color: white;
+}
+
+.btn-accent {
+  background-color: var(--bside-yellow);
+  color: var(--bside-black);
+}
+
+.btn-accent:hover:not(:disabled) {
+  background-color: var(--bside-orange);
+  color: white;
+}
+
+.btn-outline-white {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-outline-white:hover:not(:disabled) {
+  background-color: white;
+  color: var(--bside-blue);
+}
+
+.btn-success {
+  background-color: #22c55e;
+  color: white;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+/* ========================================
+   INPUTS
+   ======================================== */
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--bside-black);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: white;
+  color: var(--bside-black);
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--bside-blue);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: var(--bside-black);
+}
+
+/* ========================================
+   MENSAJES
+   ======================================== */
+
+.alert-error {
+  background-color: #fef2f2;
+  border: 2px solid var(--bside-orange);
+  color: var(--bside-orange);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.alert-info {
+  background-color: #eff6ff;
+  border: 2px solid var(--bside-blue);
+  color: var(--bside-blue);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* ========================================
+   LINKS DE TEXTO
+   ======================================== */
+
+.link-primary {
+  color: var(--bside-blue);
+  font-weight: 600;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.link-primary:hover {
+  color: var(--bside-orange);
+}
+
+/* ========================================
+   BADGES
+   ======================================== */
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-yellow {
+  background-color: var(--bside-yellow);
+  color: var(--bside-black);
+}
+
+.badge-orange {
+  background-color: var(--bside-orange);
+  color: white;
+}
+
+.badge-blue {
+  background-color: var(--bside-blue);
+  color: white;
 }

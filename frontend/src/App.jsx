@@ -8,6 +8,9 @@ import Login from "./pages/Login";
 import NoEncontrada from "./pages/NoEncontrada";
 import ProductoDetalle from "./pages/ProductoDetalle";
 import Registro from "./pages/Registro";
+import Checkout from "./pages/Checkout";
+import MisPedidos from "./pages/MisPedidos";
+import RutaProtegida from "./components/RutaProtegida";
 
 function App() {
   return (
@@ -19,10 +22,15 @@ function App() {
           <Route path="/catalogo/:id" element={<ProductoDetalle />} />
           <Route path="/personalizar" element={<Personalizador />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/mis-pedidos/:id" element={
+            <RutaProtegida>
+              <MisPedidos />
+            </RutaProtegida>
+          } />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="*" element={<NoEncontrada />} />
-          
         </Route>
       </Routes>
     </BrowserRouter>

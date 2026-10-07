@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { productosAPI, variantesAPI } from "../api/endpoints";
+import { useCarritoStore } from "../store/carritoStore";
 
 function ProductoDetalle() {
   const { id } = useParams();
@@ -11,6 +12,9 @@ function ProductoDetalle() {
   const [varianteSeleccionada, setVarianteSeleccionada] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  
+  const agregarAlCarrito = useCarritoStore((s) => s.agregar);
+  const [agregado, setAgregado] = useState(false);
 
   useEffect(() => {
     setCargando(true);
@@ -195,9 +199,27 @@ function ProductoDetalle() {
           {/* Botón agregar al carrito */}
           <button
             disabled={!varianteSeleccionada || varianteSeleccionada.stock === 0}
+            onClick={() => {
+              if (!varianteSeleccionada) return;
+              agregarAlCarrito({
+                variante_id: varianteSeleccionada.id,
+                producto_id: producto.id,
+                producto_nombre: producto.nombre,
+                variante_talla: varianteSeleccionada.talla,
+                variante_color: varianteSeleccionada.color,
+                precio_unitario: producto.precio_final,
+                imagen_principal: producto.imagen_principal || null,
+                stock_disponible: varianteSeleccionada.stock,
+                cantidad: 1,
+              });
+              setAgregado(true);
+              setTimeout(() => setAgregado(false), 2000);
+            }}
             className={`w-full py-3 rounded-full font-bold text-lg transition ${
               !varianteSeleccionada || varianteSeleccionada.stock === 0
                 ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                : agregado
+                ? "bg-green-500 text-white"
                 : "bg-bside-blue text-white hover:bg-bside-orange"
             }`}
           >
@@ -205,6 +227,8 @@ function ProductoDetalle() {
               ? "Sin stock"
               : !varianteSeleccionada
               ? "Selecciona una opción"
+              : agregado
+              ? "Agregado al carrito"
               : "Agregar al carrito"}
           </button>
         </div>

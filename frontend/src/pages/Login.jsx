@@ -37,69 +37,54 @@ function Login() {
   return (
     <div className="max-w-md mx-auto px-4 py-16">
       <h1
-        className="text-4xl font-bold mb-2 text-bside-black"
-        style={{ fontFamily: "Baloo 2" }}
+        className="text-4xl font-bold mb-2"
+        style={{ fontFamily: "Baloo 2", color: "var(--bside-black)" }}
       >
         Ingresar
       </h1>
-      <p className="text-gray-600 mb-8">
+      <p className="mb-8" style={{ color: "var(--bside-gray-500)" }}>
         Bienvenido de vuelta al lado B.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block font-medium mb-1 text-bside-black">
-            Correo electrónico
-          </label>
+          <label className="label">Correo electrónico</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            className="input"
             placeholder="tu@correo.com"
             autoComplete="email"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1 text-bside-black">
-            Contraseña
-          </label>
+          <label className="label">Contraseña</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            className="input"
             placeholder="Tu contraseña"
             autoComplete="current-password"
           />
         </div>
 
-        {error && (
-          <div className="bg-red-50 border-2 border-bside-orange text-bside-orange px-4 py-3 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
+        {error && <div className="alert-error">{error}</div>}
 
         <button
           type="submit"
           disabled={enviando}
-          className={`w-full py-3 rounded-full font-bold transition ${
-            enviando
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-bside-blue text-white hover:bg-bside-orange"
-          }`}
+          className="btn btn-primary btn-full"
         >
           {enviando ? "Ingresando..." : "Ingresar"}
         </button>
       </form>
 
-      <p className="text-center text-gray-600 mt-6">
+      <p className="text-center mt-6" style={{ color: "var(--bside-gray-500)" }}>
         ¿No tienes cuenta?{" "}
-        <Link
-          to="/registro"
-          className="text-bside-blue font-semibold hover:text-bside-orange transition"
-        >
+        <Link to="/registro" className="link-primary">
           Regístrate
         </Link>
       </p>

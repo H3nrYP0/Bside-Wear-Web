@@ -46,7 +46,6 @@ function Registro() {
     setEnviando(true);
     try {
       await registro(nombre.trim(), email.trim(), password);
-      // Login automático después del registro
       await login(email.trim(), password);
       navigate("/");
     } catch (err) {
@@ -62,97 +61,78 @@ function Registro() {
   return (
     <div className="max-w-md mx-auto px-4 py-16">
       <h1
-        className="text-4xl font-bold mb-2 text-bside-black"
-        style={{ fontFamily: "Baloo 2" }}
+        className="text-4xl font-bold mb-2"
+        style={{ fontFamily: "Baloo 2", color: "var(--bside-black)" }}
       >
         Crear cuenta
       </h1>
-      <p className="text-gray-600 mb-8">
+      <p className="mb-8" style={{ color: "var(--bside-gray-500)" }}>
         Únete al lado B de la creatividad.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block font-medium mb-1 text-bside-black">
-            Nombre
-          </label>
+          <label className="label">Nombre</label>
           <input
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            className="input"
             placeholder="Tu nombre"
             autoComplete="name"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1 text-bside-black">
-            Correo electrónico
-          </label>
+          <label className="label">Correo electrónico</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            className="input"
             placeholder="tu@correo.com"
             autoComplete="email"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1 text-bside-black">
-            Contraseña
-          </label>
+          <label className="label">Contraseña</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            className="input"
             placeholder="Mínimo 6 caracteres"
             autoComplete="new-password"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1 text-bside-black">
-            Confirmar contraseña
-          </label>
+          <label className="label">Confirmar contraseña</label>
           <input
             type="password"
             value={confirmar}
             onChange={(e) => setConfirmar(e.target.value)}
-            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            className="input"
             placeholder="Repite tu contraseña"
             autoComplete="new-password"
           />
         </div>
 
-        {error && (
-          <div className="bg-red-50 border-2 border-bside-orange text-bside-orange px-4 py-3 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
+        {error && <div className="alert-error">{error}</div>}
 
         <button
           type="submit"
           disabled={enviando}
-          className={`w-full py-3 rounded-full font-bold transition ${
-            enviando
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-bside-blue text-white hover:bg-bside-orange"
-          }`}
+          className="btn btn-primary btn-full"
         >
           {enviando ? "Creando cuenta..." : "Crear cuenta"}
         </button>
       </form>
 
-      <p className="text-center text-gray-600 mt-6">
+      <p className="text-center mt-6" style={{ color: "var(--bside-gray-500)" }}>
         ¿Ya tienes cuenta?{" "}
-        <Link
-          to="/login"
-          className="text-bside-blue font-semibold hover:text-bside-orange transition"
-        >
+        <Link to="/login" className="link-primary">
           Ingresa
         </Link>
       </p>
