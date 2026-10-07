@@ -2,32 +2,57 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
-function Login() {
+function Registro() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { registro, login } = useAuth();
 
+  const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmar, setConfirmar] = useState("");
   const [error, setError] = useState(null);
   const [enviando, setEnviando] = useState(false);
+
+  const validar = () => {
+    if (!nombre.trim() || !email.trim() || !password || !confirmar) {
+      return "Todos los campos son obligatorios";
+    }
+    if (nombre.trim().length < 2) {
+      return "El nombre debe tener al menos 2 caracteres";
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      return "El correo no es válido";
+    }
+    if (password.length < 6) {
+      return "La contraseña debe tener al menos 6 caracteres";
+    }
+    if (password !== confirmar) {
+      return "Las contraseñas no coinciden";
+    }
+    return null;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    if (!email.trim() || !password) {
-      setError("Todos los campos son obligatorios");
+    const errorValidacion = validar();
+    if (errorValidacion) {
+      setError(errorValidacion);
       return;
     }
 
     setEnviando(true);
     try {
+      await registro(nombre.trim(), email.trim(), password);
+      // Login automático después del registro
       await login(email.trim(), password);
       navigate("/");
     } catch (err) {
       const mensaje =
         err.response?.data?.error ||
-        "No se pudo iniciar sesión. Intenta de nuevo.";
+        "No se pudo completar el registro. Intenta de nuevo.";
       setError(mensaje);
     } finally {
       setEnviando(false);
@@ -40,13 +65,27 @@ function Login() {
         className="text-4xl font-bold mb-2 text-bside-black"
         style={{ fontFamily: "Baloo 2" }}
       >
-        Ingresar
+        Crear cuenta
       </h1>
       <p className="text-gray-600 mb-8">
-        Bienvenido de vuelta al lado B.
+        Únete al lado B de la creatividad.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-5">
+        <div>
+          <label className="block font-medium mb-1 text-bside-black">
+            Nombre
+          </label>
+          <input
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            placeholder="Tu nombre"
+            autoComplete="name"
+          />
+        </div>
+
         <div>
           <label className="block font-medium mb-1 text-bside-black">
             Correo electrónico
@@ -70,8 +109,22 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
-            placeholder="Tu contraseña"
-            autoComplete="current-password"
+            placeholder="Mínimo 6 caracteres"
+            autoComplete="new-password"
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1 text-bside-black">
+            Confirmar contraseña
+          </label>
+          <input
+            type="password"
+            value={confirmar}
+            onChange={(e) => setConfirmar(e.target.value)}
+            className="w-full px-4 py-2 border-2 border-bside-black rounded-lg focus:outline-none focus:border-bside-blue transition"
+            placeholder="Repite tu contraseña"
+            autoComplete="new-password"
           />
         </div>
 
@@ -90,21 +143,21 @@ function Login() {
               : "bg-bside-blue text-white hover:bg-bside-orange"
           }`}
         >
-          {enviando ? "Ingresando..." : "Ingresar"}
+          {enviando ? "Creando cuenta..." : "Crear cuenta"}
         </button>
       </form>
 
       <p className="text-center text-gray-600 mt-6">
-        ¿No tienes cuenta?{" "}
+        ¿Ya tienes cuenta?{" "}
         <Link
-          to="/registro"
+          to="/login"
           className="text-bside-blue font-semibold hover:text-bside-orange transition"
         >
-          Regístrate
+          Ingresa
         </Link>
       </p>
     </div>
   );
 }
 
-export default Login;
+export default Registro;

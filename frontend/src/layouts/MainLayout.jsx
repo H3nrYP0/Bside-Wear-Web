@@ -1,7 +1,16 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 import Logo from "../components/Logo";
 
 function MainLayout() {
+  const { estaAutenticado, usuario, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
@@ -27,12 +36,26 @@ function MainLayout() {
             >
               Carrito
             </Link>
-            <Link
-              to="/login"
-              className="px-4 py-2 bg-bside-blue text-white font-semibold rounded-full hover:bg-bside-orange transition"
-            >
-              Ingresar
-            </Link>
+            {estaAutenticado ? (
+              <div className="flex items-center gap-3">
+                <span className="hidden md:inline text-sm font-medium text-bside-black">
+                  {usuario?.nombre}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 border-2 border-bside-black text-bside-black font-semibold rounded-full hover:bg-bside-black hover:text-white transition"
+                >
+                  Salir
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="px-4 py-2 bg-bside-blue text-white font-semibold rounded-full hover:bg-bside-orange transition"
+              >
+                Ingresar
+              </Link>
+            )}
           </div>
         </div>
       </header>
