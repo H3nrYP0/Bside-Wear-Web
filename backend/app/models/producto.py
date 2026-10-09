@@ -58,6 +58,7 @@ class Producto(db.Model):
     porcentaje_descuento = db.Column(db.Numeric(5, 2), nullable=True)
 
     estado = db.Column(db.Boolean, nullable=False, default=True)
+    personalizable = db.Column(db.Boolean, nullable=False, default=False)
 
     # Relaciones
     categoria = db.relationship("Categoria", back_populates="productos")
@@ -104,6 +105,7 @@ class Producto(db.Model):
             ),
             "precio_final": self.precio_final(),
             "estado": self.estado,
+            "personalizable": self.personalizable,
             "imagen_principal": imagen_principal,
             "imagenes": [img.url for img in imagenes_ordenadas],
         }

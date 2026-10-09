@@ -21,6 +21,7 @@ def listar_productos():
             min_precio=request.args.get("min_precio", type=float),
             max_precio=request.args.get("max_precio", type=float),
             solo_ofertas=request.args.get("solo_ofertas", "false").lower() == "true",
+            solo_personalizables=request.args.get("personalizable", "false").lower() == "true",
             page=request.args.get("page", 1, type=int),
             per_page=min(request.args.get("per_page", 12, type=int), 50),
         )

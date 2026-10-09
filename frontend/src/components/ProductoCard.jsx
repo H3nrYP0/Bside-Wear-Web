@@ -26,6 +26,21 @@ function ProductoCard({ producto }) {
 
       {/* Info */}
       <div className="p-4">
+        {producto.personalizable && (
+            <span
+              className="badge"
+              style={{
+                backgroundColor: "var(--bside-yellow)",
+                color: "var(--bside-black)",
+                fontSize: "0.6rem",
+                padding: "0.15rem 0.5rem",
+                marginBottom: "0.5rem",
+                display: "inline-block",
+              }}
+            >
+              Personalizable
+            </span>
+          )}
         <h3 className="font-bold text-bside-black mb-1 line-clamp-2">
           {producto.nombre}
         </h3>

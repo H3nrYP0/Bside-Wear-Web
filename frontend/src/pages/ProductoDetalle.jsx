@@ -116,6 +116,19 @@ function ProductoDetalle() {
 
         {/* Info */}
         <div>
+          {producto.personalizable && (
+            <span
+              className="badge"
+              style={{
+                backgroundColor: "var(--bside-yellow)",
+                color: "var(--bside-black)",
+                marginBottom: "0.75rem",
+                display: "inline-block",
+              }}
+            >
+              Personalizable
+            </span>
+          )}
           <h1
             className="text-3xl md:text-4xl font-bold mb-2 text-bside-black"
             style={{ fontFamily: "Baloo 2" }}
@@ -194,6 +207,17 @@ function ProductoDetalle() {
                 </p>
               )}
             </div>
+          )}
+
+          {/* Botón personalizar (si aplica) */}
+          {producto.personalizable && (
+            <Link
+              to={`/personalizar/${producto.id}`}
+              className="btn btn-secondary btn-full mb-3"
+              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              Personalizar esta prenda
+            </Link>
           )}
 
           {/* Botón agregar al carrito */}

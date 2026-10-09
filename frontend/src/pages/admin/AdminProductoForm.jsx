@@ -23,6 +23,7 @@ function AdminProductoForm() {
   const [enOferta, setEnOferta] = useState(false);
   const [porcentajeDescuento, setPorcentajeDescuento] = useState("");
   const [estado, setEstado] = useState(true);
+  const [personalizable, setPersonalizable] = useState(false);
 
   // Variantes iniciales (solo al crear)
   const [variantes, setVariantes] = useState([
@@ -57,6 +58,7 @@ function AdminProductoForm() {
           p.porcentaje_descuento ? String(p.porcentaje_descuento) : ""
         );
         setEstado(p.estado);
+        setPersonalizable(p.personalizable || false);
       })
       .catch((err) => setError(err.response?.data?.error || err.message))
       .finally(() => setCargando(false));
@@ -113,6 +115,7 @@ function AdminProductoForm() {
       precio_venta: Number(precioVenta),
       en_oferta: enOferta,
       porcentaje_descuento: enOferta ? Number(porcentajeDescuento) : null,
+      personalizable,
     };
 
     setEnviando(true);
@@ -291,6 +294,25 @@ function AdminProductoForm() {
                 />
               </div>
             )}
+          </div>
+          
+          <div className="mt-4">
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={personalizable}
+                onChange={(e) => setPersonalizable(e.target.checked)}
+              />
+              <span className="text-sm font-medium">
+                Producto personalizable
+              </span>
+            </label>
+            <p
+              className="text-xs mt-1 ml-6"
+              style={{ color: "var(--bside-gray-500)" }}
+            >
+              Si lo marcas, este producto aparecerá en el personalizador.
+            </p>
           </div>
         </div>
 

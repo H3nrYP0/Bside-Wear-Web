@@ -127,6 +127,12 @@ function AdminProductoDetalle() {
             </p>
           </div>
           <div>
+            <p style={{ color: "var(--bside-gray-500)" }}>Personalizable</p>
+            <p className="font-medium">
+              {producto.personalizable ? "Sí" : "No"}
+            </p>
+          </div>
+          <div>
             <p style={{ color: "var(--bside-gray-500)" }}>Precio costo</p>
             <p className="font-medium">
               ${producto.precio_costo.toLocaleString("es-CO")}

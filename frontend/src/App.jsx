@@ -31,6 +31,7 @@ function App() {
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/catalogo/:id" element={<ProductoDetalle />} />
           <Route path="/personalizar" element={<Personalizador />} />
+          <Route path="/personalizar/:productoId" element={<Personalizador />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route

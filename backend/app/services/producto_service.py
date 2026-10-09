@@ -85,6 +85,7 @@ def listar_productos_publicos(
     min_precio: float | None = None,
     max_precio: float | None = None,
     solo_ofertas: bool = False,
+    solo_personalizables: bool = False,
     page: int = 1,
     per_page: int = 12,
 ):
@@ -121,6 +122,9 @@ def listar_productos_publicos(
 
     if solo_ofertas:
         query = query.filter(Producto.en_oferta.is_(True))
+
+    if solo_personalizables:
+        query = query.filter(Producto.personalizable.is_(True))
 
     query = query.order_by(Producto.nombre.asc())
 
@@ -224,6 +228,7 @@ def crear_producto(data: dict) -> Producto:
         en_oferta=en_oferta,
         porcentaje_descuento=porcentaje_descuento,
         estado=bool(data.get("estado", True)),
+        personalizable=bool(data.get("personalizable", False)),
     )
 
     db.session.add(producto)
@@ -294,6 +299,11 @@ def actualizar_producto(producto_id: int, data: dict) -> Producto:
         if not isinstance(data["estado"], bool):
             raise ValueError("El estado debe ser verdadero o falso")
         producto.estado = data["estado"]
+
+    if "personalizable" in data:
+        if not isinstance(data["personalizable"], bool):
+            raise ValueError("El campo personalizable debe ser verdadero o falso")
+        producto.personalizable = data["personalizable"]
 
     db.session.commit()
     return producto
