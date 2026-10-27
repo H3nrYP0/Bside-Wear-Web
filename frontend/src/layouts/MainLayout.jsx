@@ -4,7 +4,7 @@ import { useCarritoStore } from "../store/carritoStore";
 import Logo from "../components/Logo";
 
 function MainLayout() {
-  const { estaAutenticado, usuario, logout } = useAuth();
+  const { estaAutenticado, usuario, logout, esAdmin } = useAuth();
   const navigate = useNavigate();
   const totalItems = useCarritoStore((s) => s.totalItems());
 
@@ -26,8 +26,9 @@ function MainLayout() {
 
           <nav className="hidden md:flex items-center gap-6 font-medium">
             <NavItem to="/">Inicio</NavItem>
-            <NavItem to="/catalogo">Catálogo</NavItem>
-            <NavItem to="/personalizar">Personalizar</NavItem>
+            <NavItem to="/catalogo">Drops</NavItem>
+            <NavItem to="/nosotros">Nosotros</NavItem>
+            {esAdmin && <NavItem to="/admin">Panel Administrativo</NavItem>}
           </nav>
 
           <div className="flex items-center gap-3">
@@ -59,9 +60,14 @@ function MainLayout() {
                 </button>
               </div>
             ) : (
-              <Link to="/login" className="btn btn-primary">
-                Ingresar
-              </Link>
+              <div className="flex gap-2">
+                <Link to="/login" className="btn btn-secondary">
+                  Iniciar sesión
+                </Link>
+                <Link to="/registro" className="btn btn-primary">
+                  Registrarse
+                </Link>
+              </div>
             )}
           </div>
         </div>
@@ -95,17 +101,17 @@ function MainLayout() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/catalogo" className="hover:opacity-80 transition">
-                  Catálogo
+                  Drops
                 </Link>
               </li>
               <li>
-                <Link to="/personalizar" className="hover:opacity-80 transition">
-                  Personalizar
+                <Link to="/nosotros" className="hover:opacity-80 transition">
+                  Nosotros
                 </Link>
               </li>
               <li>
                 <Link to="/login" className="hover:opacity-80 transition">
-                  Ingresar
+                  Iniciar sesión
                 </Link>
               </li>
             </ul>

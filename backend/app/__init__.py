@@ -33,7 +33,6 @@ def create_app():
     from app.routes.productos import productos_bp
     from app.routes.variantes import variantes_bp
     from app.routes.imagenes import imagenes_bp
-    from app.routes.disenos import disenos_bp
     from app.routes.pedidos import pedidos_bp
     from app.routes.dashboard import dashboard_bp
 
@@ -43,7 +42,6 @@ def create_app():
     app.register_blueprint(productos_bp, url_prefix="/api/productos")
     app.register_blueprint(variantes_bp, url_prefix="/api/variantes")
     app.register_blueprint(imagenes_bp, url_prefix="/api/imagenes")
-    app.register_blueprint(disenos_bp, url_prefix="/api/disenos")
     app.register_blueprint(pedidos_bp, url_prefix="/api/pedidos")
     app.register_blueprint(dashboard_bp, url_prefix="/api/dashboard")
 

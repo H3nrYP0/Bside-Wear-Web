@@ -53,19 +53,6 @@ export const imagenesAPI = {
   eliminar: (id) => client.delete(`/imagenes/${id}`),
 };
 
-// ===== Diseños =====
-export const disenosAPI = {
-  listar: (params) => client.get("/disenos/", { params }),
-  obtener: (id) => client.get(`/disenos/${id}`),
-  adminListarTodos: (params) => client.get("/disenos/admin/todos", { params }),
-  crear: (formData) =>
-    client.post("/disenos/", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    }),
-  actualizar: (id, data) => client.put(`/disenos/${id}`, data),
-  eliminar: (id) => client.delete(`/disenos/${id}`),
-};
-
 // ===== Pedidos =====
 export const pedidosAPI = {
   crear: (data) => client.post("/pedidos/", data),

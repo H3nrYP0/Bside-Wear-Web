@@ -27,7 +27,6 @@ function ProductoDetalle() {
       .then(([resProducto, resVariantes]) => {
         setProducto(resProducto.data.producto);
         setVariantes(resVariantes.data.variantes);
-        // Si solo hay una variante, seleccionarla automáticamente
         if (resVariantes.data.variantes.length === 1) {
           setVarianteSeleccionada(resVariantes.data.variantes[0]);
         }
@@ -54,7 +53,7 @@ function ProductoDetalle() {
           to="/catalogo"
           className="text-bside-blue font-semibold hover:text-bside-orange transition"
         >
-          ← Volver al catálogo
+          ← Volver a los drops
         </Link>
       </div>
     );
@@ -65,17 +64,15 @@ function ProductoDetalle() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* Breadcrumb */}
       <nav className="text-sm text-gray-500 mb-6">
         <Link to="/catalogo" className="hover:text-bside-blue">
-          Catálogo
+          Drops
         </Link>
         <span className="mx-2">/</span>
         <span className="text-bside-black">{producto.nombre}</span>
       </nav>
 
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Galería */}
         <div>
           <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-3">
             {tieneImagenes ? (
@@ -114,21 +111,7 @@ function ProductoDetalle() {
           )}
         </div>
 
-        {/* Info */}
         <div>
-          {producto.personalizable && (
-            <span
-              className="badge"
-              style={{
-                backgroundColor: "var(--bside-yellow)",
-                color: "var(--bside-black)",
-                marginBottom: "0.75rem",
-                display: "inline-block",
-              }}
-            >
-              Personalizable
-            </span>
-          )}
           <h1
             className="text-3xl md:text-4xl font-bold mb-2 text-bside-black"
             style={{ fontFamily: "Baloo 2" }}
@@ -142,7 +125,6 @@ function ProductoDetalle() {
             </p>
           )}
 
-          {/* Precio */}
           <div className="mb-6">
             {producto.en_oferta && producto.porcentaje_descuento ? (
               <div className="flex items-center gap-3">
@@ -163,12 +145,10 @@ function ProductoDetalle() {
             )}
           </div>
 
-          {/* Descripción */}
           {producto.descripcion && (
             <p className="text-gray-700 mb-6">{producto.descripcion}</p>
           )}
 
-          {/* Variantes */}
           {variantes.length > 0 && (
             <div className="mb-6">
               <h3 className="font-bold mb-3 text-bside-black">
@@ -209,18 +189,6 @@ function ProductoDetalle() {
             </div>
           )}
 
-          {/* Botón personalizar (si aplica) */}
-          {producto.personalizable && (
-            <Link
-              to={`/personalizar/${producto.id}`}
-              className="btn btn-secondary btn-full mb-3"
-              style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-            >
-              Personalizar esta prenda
-            </Link>
-          )}
-
-          {/* Botón agregar al carrito */}
           <button
             disabled={!varianteSeleccionada || varianteSeleccionada.stock === 0}
             onClick={() => {

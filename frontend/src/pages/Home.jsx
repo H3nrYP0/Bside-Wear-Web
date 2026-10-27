@@ -34,20 +34,6 @@ function Home() {
             No somos tendencia masiva. Somos el reverso del disco. Streetwear
             con identidad propia desde Medellín.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link
-              to="/catalogo"
-              className="px-8 py-3 bg-bside-yellow text-bside-black font-bold rounded-full hover:bg-bside-orange hover:text-white transition"
-            >
-              Ver catálogo
-            </Link>
-            <Link
-              to="/personalizar"
-              className="px-8 py-3 border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-bside-blue transition"
-            >
-              Personalizar prenda
-            </Link>
-          </div>
         </div>
       </section>
 

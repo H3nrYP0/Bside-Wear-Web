@@ -23,7 +23,6 @@ function AdminSidebar() {
         <SidebarItem to="/admin/productos">Productos</SidebarItem>
         <SidebarItem to="/admin/categorias">Categorías</SidebarItem>
         <SidebarItem to="/admin/pedidos">Pedidos</SidebarItem>
-        <SidebarItem to="/admin/disenos">Diseños</SidebarItem>
       </nav>
     </aside>
   );

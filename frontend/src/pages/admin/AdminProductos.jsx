@@ -170,19 +170,7 @@ function AdminProductos() {
                     <Td>
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-medium">{prod.nombre}</span>
-                        {prod.personalizable && (
-                          <span
-                            className="badge"
-                            style={{
-                              backgroundColor: "var(--bside-yellow)",
-                              color: "var(--bside-black)",
-                              fontSize: "0.6rem",
-                              padding: "0.15rem 0.5rem",
-                            }}
-                          >
-                            Personalizable
-                          </span>
-                        )}
+                        
                       </div>
                       {prod.tipo_corte && (
                         <div

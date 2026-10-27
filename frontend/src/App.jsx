@@ -3,7 +3,6 @@ import MainLayout from "./layouts/MainLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import Home from "./pages/Home";
 import Catalogo from "./pages/Catalogo";
-import Personalizador from "./pages/Personalizador";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/Login";
 import Registro from "./pages/Registro";
@@ -16,7 +15,6 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminCategorias from "./pages/admin/AdminCategorias";
 import AdminProductos from "./pages/admin/AdminProductos";
 import AdminPedidos from "./pages/admin/AdminPedidos";
-import AdminDisenos from "./pages/admin/AdminDisenos";
 import AdminProductoForm from "./pages/admin/AdminProductoForm";
 import AdminProductoDetalle from "./pages/admin/AdminProductoDetalle";
 import AdminPedidoDetalle from "./pages/admin/AdminPedidoDetalle";
@@ -30,8 +28,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/catalogo/:id" element={<ProductoDetalle />} />
-          <Route path="/personalizar" element={<Personalizador />} />
-          <Route path="/personalizar/:productoId" element={<Personalizador />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route
@@ -64,7 +60,6 @@ function App() {
           <Route path="productos/:id/editar" element={<AdminProductoForm />} />
           <Route path="pedidos" element={<AdminPedidos />} />
           <Route path="pedidos/:id" element={<AdminPedidoDetalle />} />
-          <Route path="disenos" element={<AdminDisenos />} />
         </Route>
       </Routes>
     </BrowserRouter>
